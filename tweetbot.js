@@ -96,7 +96,7 @@ Rates:
 @Bitstamp
 
 #DigitalCoin
-#CryptoCurrency
+#Cryptocurrency
 `;
  
  let Tweet = { status : Body };
