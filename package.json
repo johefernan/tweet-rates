@@ -1,0 +1,19 @@
+{
+  "name": "tweetcoinrates",
+  "version": "1.0.0",
+  "description": "Tweet CryptoCurrency Rates",
+  "main": "tweetbot.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/johefernan/TweetCoinRates.git"
+  },
+  "author": "Joan Hermida",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/johefernan/TweetCoinRates/issues"
+  },
+  "homepage": "https://github.com/johefernan/TweetCoinRates#readme"
+}
