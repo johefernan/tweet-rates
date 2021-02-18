@@ -1,6 +1,6 @@
 {
   "name": "tweet-rates",
-  "version": "1.1.0",
+  "version": "1.1.1",
   "description": "Tweet Cryptocurrency Rates",
   "main": "tweetbot.js",
   "scripts": {

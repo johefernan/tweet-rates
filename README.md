@@ -6,6 +6,12 @@ Tweet cryptocurrency rates using [Twit](https://www.npmjs.com/package/twit). Thi
 
 DISCLAIMER: If you want to run this code and you don't have a developer account on Twitter, please apply for a developer account in the [Developer Portal](https://developer.twitter.com). This code will not help you in any way to create or use any existing Twitter application. A free API key is also needed for rates request from CoinMarketCap.
 
+Please, consider to use your own Secret Name from AWS Secrets Manager.
+
+```javascript
+secretName: "app/Twitter/TweetRates"
+```
+
 ##### Current Rates:
 
 - Bitcoin
