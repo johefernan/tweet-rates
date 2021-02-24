@@ -6,10 +6,26 @@ Tweet cryptocurrency rates using [Twit](https://www.npmjs.com/package/twit). Thi
 
 DISCLAIMER: If you want to run this code and you don't have a developer account on Twitter, please apply for a developer account in the [Developer Portal](https://developer.twitter.com). This code will not help you in any way to create or use any existing Twitter application. A free API key is also needed for rates request from CoinMarketCap.
 
-Please, consider to use your own Secret Name from AWS Secrets Manager.
+##### Requirements
+
+- AWS Lambda.
+- AWS Secrets Manager.
+- Amazon EventBridge.
+- CoinMarketCap API Key.
+- Twitter Developer Account.
+
+##### Usage
+
+- Create a secret from AWS Secrets Manager to store API keys.
+- Create a serverless function from AWS Lambda.
+    - Use the environment variables below with your own values.
+        - SECRET_NAME: Your new secret name from AWS Secrets Manager.
+        - SECRET_REGION: The secret region.
+- Additionally consider to use Amazon EventBridge Rules with a scheduled Event (cron).
 
 ```javascript
-secretName: "app/Twitter/TweetRates"
+SECRET_REGION: "us-east-1"
+SECRET_NAME: "MyNewSecret/TweetRatesKeys"
 ```
 
 ##### Current Rates:
