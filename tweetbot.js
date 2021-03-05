@@ -90,9 +90,9 @@ exports.handler = function(event, context, callback) {
         const xrp_id = 52;
         const doge_id = 74;
         const ltc_id = 2;
-        const grt_id = 6719;
+        const mana_id = 1966;
         
-        var BtcPrice, BtcChange, EthPrice, EthChange, XrpPrice, XrpChange, DogePrice, DogeChange, LtcPrice, LtcChange, GrtPrice, GrtChange;
+        var BtcPrice, BtcChange, EthPrice, EthChange, XrpPrice, XrpChange, DogePrice, DogeChange, LtcPrice, LtcChange, ManaPrice, ManaChange;
     
         // Here we start to handling request to API
     
@@ -283,10 +283,10 @@ exports.handler = function(event, context, callback) {
             });
         };
     
-        // Feature Coin (The Graph)
-        var CheckGrtPrice = (BtcPrice, BtcChange, EthPrice, EthChange, XrpPrice, XrpChange, DogePrice, DogeChange, LtcPrice, LtcChange, callback) => {
+        // Feature Coin (Decentraland)
+        var CheckManaPrice = (BtcPrice, BtcChange, EthPrice, EthChange, XrpPrice, XrpChange, DogePrice, DogeChange, LtcPrice, LtcChange, callback) => {
             request({
-                url: cmc_url + grt_id,
+                url: cmc_url + mana_id,
                 headers: cmc_api_key,
                 json: true,
             },
@@ -295,16 +295,16 @@ exports.handler = function(event, context, callback) {
                     throw err;
                 }
                 else {
-                    GrtPrice = json.data[grt_id].quote['USD'].price;
-                    GrtPrice = Math.round(GrtPrice * 100) / 100;
-                    callback(null, BtcPrice, BtcChange, EthPrice, EthChange, XrpPrice, XrpChange, DogePrice, DogeChange, LtcPrice, LtcChange, GrtPrice);
+                    ManaPrice = json.data[mana_id].quote['USD'].price;
+                    ManaPrice = Math.round(ManaPrice * 100) / 100;
+                    callback(null, BtcPrice, BtcChange, EthPrice, EthChange, XrpPrice, XrpChange, DogePrice, DogeChange, LtcPrice, LtcChange, ManaPrice);
                 }
             });
         };
     
-        var CheckGrtChange = (BtcPrice, BtcChange, EthPrice, EthChange, XrpPrice, XrpChange, DogePrice, DogeChange, LtcPrice, LtcChange, GrtPrice, callback) => {
+        var CheckManaChange = (BtcPrice, BtcChange, EthPrice, EthChange, XrpPrice, XrpChange, DogePrice, DogeChange, LtcPrice, LtcChange, ManaPrice, callback) => {
             request({
-                url: cmc_url + grt_id,
+                url: cmc_url + mana_id,
                 headers: cmc_api_key,
                 json: true,
             },
@@ -313,35 +313,35 @@ exports.handler = function(event, context, callback) {
                     throw err;
                 }
                 else {
-                    GrtChange = json.data[grt_id].quote['USD'].percent_change_24h;
-                    GrtChange = Math.round(GrtChange * 100) / 100;
-                    callback(null, BtcPrice, BtcChange, EthPrice, EthChange, XrpPrice, XrpChange, DogePrice, DogeChange, LtcPrice, LtcChange, GrtPrice, GrtChange);
+                    ManaChange = json.data[mana_id].quote['USD'].percent_change_24h;
+                    ManaChange = Math.round(ManaChange * 100) / 100;
+                    callback(null, BtcPrice, BtcChange, EthPrice, EthChange, XrpPrice, XrpChange, DogePrice, DogeChange, LtcPrice, LtcChange, ManaPrice, ManaChange);
                 }
             });
         };
     
-        var CheckRate = (BtcPrice, BtcChange, EthPrice, EthChange, XrpPrice, XrpChange, DogePrice, DogeChange, LtcPrice, LtcChange, GrtPrice, GrtChange, callback) => {
+        var CheckRate = (BtcPrice, BtcChange, EthPrice, EthChange, XrpPrice, XrpChange, DogePrice, DogeChange, LtcPrice, LtcChange, ManaPrice, ManaChange, callback) => {
      
             let Body = `
-Bitcoin #BTC
+#Bitcoin #BTC
 $ ${BtcPrice} USD (${BtcChange}%)
     
-Ethereum #ETH
+#Ethereum #ETH
 $ ${EthPrice} USD (${EthChange}%)
     
-Ripple #XRP
+#Ripple #XRP
 $ ${XrpPrice} USD (${XrpChange}%)
     
-Dogecoin #DOGE
+#Dogecoin #DOGE
 $ ${DogePrice} USD (${DogeChange}%)
     
-Litecoin #LTC
+#Litecoin #LTC
 $ ${LtcPrice} USD (${LtcChange}%)
     
 Feature Rate:
     
-The Graph #GRT
-$ ${GrtPrice} USD (${GrtChange}%)
+#Decentraland #MANA
+$ ${ManaPrice} USD (${ManaChange}%)
 `;
     
             let Tweet = { status : Body };
@@ -351,7 +351,7 @@ $ ${GrtPrice} USD (${GrtChange}%)
         };
     
         // Running asynchronous functions in sequence with Async Waterfall.
-        waterfall([CheckBtcPrice, CheckBtcChange, CheckEthPrice, CheckEthChange, CheckXrpPrice, CheckXrpChange, CheckDogePrice, CheckDogeChange, CheckLtcPrice, CheckLtcChange, CheckGrtPrice, CheckGrtChange, CheckRate], (err, result) => {
+        waterfall([CheckBtcPrice, CheckBtcChange, CheckEthPrice, CheckEthChange, CheckXrpPrice, CheckXrpChange, CheckDogePrice, CheckDogeChange, CheckLtcPrice, CheckLtcChange, CheckManaPrice, CheckManaChange, CheckRate], (err, result) => {
             if (err) {
                 throw err;
             }
