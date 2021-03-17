@@ -339,7 +339,7 @@ $ ${DogePrice} USD (${DogeChange}%)
 #Litecoin #LTC
 $ ${LtcPrice} USD (${LtcChange}%)
     
-Feature Rate:
+Floating Rate:
     
 #BasicAttentionToken #BAT
 $ ${BatPrice} USD (${BatChange}%)
