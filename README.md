@@ -35,7 +35,7 @@ SECRET_NAME: "MyNewSecret/TweetRatesKeys"
 - Ripple
 - Dogecoin
 - Litecoin
-- The Graph (Floating Rate)
+- Basic Attention Token (Floating Rate)
 
 ##### Floating Rate
 

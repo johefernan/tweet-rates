@@ -90,9 +90,10 @@ exports.handler = function(event, context, callback) {
         const xrp_id = 52;
         const doge_id = 74;
         const ltc_id = 2;
-        const mana_id = 1966;
+        //const mana_id = 1966;
+        const bat_id = 1697;
         
-        var BtcPrice, BtcChange, EthPrice, EthChange, XrpPrice, XrpChange, DogePrice, DogeChange, LtcPrice, LtcChange, ManaPrice, ManaChange;
+        var BtcPrice, BtcChange, EthPrice, EthChange, XrpPrice, XrpChange, DogePrice, DogeChange, LtcPrice, LtcChange, BatPrice, BatChange;
     
         // Here we start to handling request to API
     
@@ -284,9 +285,9 @@ exports.handler = function(event, context, callback) {
         };
     
         // Feature Coin (Decentraland)
-        var CheckManaPrice = (BtcPrice, BtcChange, EthPrice, EthChange, XrpPrice, XrpChange, DogePrice, DogeChange, LtcPrice, LtcChange, callback) => {
+        var CheckBatPrice = (BtcPrice, BtcChange, EthPrice, EthChange, XrpPrice, XrpChange, DogePrice, DogeChange, LtcPrice, LtcChange, callback) => {
             request({
-                url: cmc_url + mana_id,
+                url: cmc_url + bat_id,
                 headers: cmc_api_key,
                 json: true,
             },
@@ -295,16 +296,16 @@ exports.handler = function(event, context, callback) {
                     throw err;
                 }
                 else {
-                    ManaPrice = json.data[mana_id].quote['USD'].price;
-                    ManaPrice = Math.round(ManaPrice * 100) / 100;
-                    callback(null, BtcPrice, BtcChange, EthPrice, EthChange, XrpPrice, XrpChange, DogePrice, DogeChange, LtcPrice, LtcChange, ManaPrice);
+                    BatPrice = json.data[bat_id].quote['USD'].price;
+                    BatPrice = Math.round(BatPrice * 100) / 100;
+                    callback(null, BtcPrice, BtcChange, EthPrice, EthChange, XrpPrice, XrpChange, DogePrice, DogeChange, LtcPrice, LtcChange, BatPrice);
                 }
             });
         };
     
-        var CheckManaChange = (BtcPrice, BtcChange, EthPrice, EthChange, XrpPrice, XrpChange, DogePrice, DogeChange, LtcPrice, LtcChange, ManaPrice, callback) => {
+        var CheckBatChange = (BtcPrice, BtcChange, EthPrice, EthChange, XrpPrice, XrpChange, DogePrice, DogeChange, LtcPrice, LtcChange, BatPrice, callback) => {
             request({
-                url: cmc_url + mana_id,
+                url: cmc_url + bat_id,
                 headers: cmc_api_key,
                 json: true,
             },
@@ -313,14 +314,14 @@ exports.handler = function(event, context, callback) {
                     throw err;
                 }
                 else {
-                    ManaChange = json.data[mana_id].quote['USD'].percent_change_24h;
-                    ManaChange = Math.round(ManaChange * 100) / 100;
-                    callback(null, BtcPrice, BtcChange, EthPrice, EthChange, XrpPrice, XrpChange, DogePrice, DogeChange, LtcPrice, LtcChange, ManaPrice, ManaChange);
+                    BatChange = json.data[bat_id].quote['USD'].percent_change_24h;
+                    BatChange = Math.round(BatChange * 100) / 100;
+                    callback(null, BtcPrice, BtcChange, EthPrice, EthChange, XrpPrice, XrpChange, DogePrice, DogeChange, LtcPrice, LtcChange, BatPrice, BatChange);
                 }
             });
         };
     
-        var CheckRate = (BtcPrice, BtcChange, EthPrice, EthChange, XrpPrice, XrpChange, DogePrice, DogeChange, LtcPrice, LtcChange, ManaPrice, ManaChange, callback) => {
+        var CheckRate = (BtcPrice, BtcChange, EthPrice, EthChange, XrpPrice, XrpChange, DogePrice, DogeChange, LtcPrice, LtcChange, BatPrice, BatChange, callback) => {
      
             let Body = `
 #Bitcoin #BTC
@@ -340,8 +341,8 @@ $ ${LtcPrice} USD (${LtcChange}%)
     
 Feature Rate:
     
-#Decentraland #MANA
-$ ${ManaPrice} USD (${ManaChange}%)
+#BasicAttentionToken #BAT
+$ ${BatPrice} USD (${BatChange}%)
 `;
     
             let Tweet = { status : Body };
@@ -351,7 +352,7 @@ $ ${ManaPrice} USD (${ManaChange}%)
         };
     
         // Running asynchronous functions in sequence with Async Waterfall.
-        waterfall([CheckBtcPrice, CheckBtcChange, CheckEthPrice, CheckEthChange, CheckXrpPrice, CheckXrpChange, CheckDogePrice, CheckDogeChange, CheckLtcPrice, CheckLtcChange, CheckManaPrice, CheckManaChange, CheckRate], (err, result) => {
+        waterfall([CheckBtcPrice, CheckBtcChange, CheckEthPrice, CheckEthChange, CheckXrpPrice, CheckXrpChange, CheckDogePrice, CheckDogeChange, CheckLtcPrice, CheckLtcChange, CheckBatPrice, CheckBatChange, CheckRate], (err, result) => {
             if (err) {
                 throw err;
             }
