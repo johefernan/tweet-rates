@@ -104,8 +104,8 @@ exports.handler = function(event, context, callback) {
             LtcPrice, 
             LtcChange, 
             BatPrice, 
-            BatChange; 
-            ManaPrice; 
+            BatChange, 
+            ManaPrice, 
             ManaChange; 
     
         // Here we start to handling request to API
