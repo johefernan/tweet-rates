@@ -344,8 +344,8 @@ exports.handler = function(event, context, callback) {
                     throw err;
                 }
                 else {
-                    BatPrice = json.data[mana_id].quote['USD'].price;
-                    BatPrice = Math.round(BatPrice * 100) / 100;
+                    ManaPrice = json.data[mana_id].quote['USD'].price;
+                    ManaPrice = Math.round(ManaPrice * 100) / 100;
                     callback(null, BtcPrice, BtcChange, EthPrice, EthChange, XrpPrice, XrpChange, DogePrice, DogeChange, LtcPrice, LtcChange, BatPrice, BatChange, ManaPrice);
                 }
             });ManaChange
@@ -362,8 +362,8 @@ exports.handler = function(event, context, callback) {
                     throw err;
                 }
                 else {
-                    BatChange = json.data[mana_id].quote['USD'].percent_change_24h;
-                    BatChange = Math.round(BatChange * 100) / 100;
+                    ManaChange = json.data[mana_id].quote['USD'].percent_change_24h;
+                    ManaChange = Math.round(ManaChange * 100) / 100;
                     callback(null, BtcPrice, BtcChange, EthPrice, EthChange, XrpPrice, XrpChange, DogePrice, DogeChange, LtcPrice, LtcChange, BatPrice, BatChange, ManaPrice, ManaChange);
                 }
             });
