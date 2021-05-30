@@ -372,26 +372,13 @@ exports.handler = function(event, context, callback) {
         var CheckRate = (BtcPrice, BtcChange, EthPrice, EthChange, XrpPrice, XrpChange, DogePrice, DogeChange, LtcPrice, LtcChange, BatPrice, BatChange, ManaChange, ManaPrice, callback) => {
      
             let Body = `
-#Bitcoin $BTC
-$ ${BtcPrice} USD (${BtcChange}%)
-    
-#Ethereum $ETH
-$ ${EthPrice} USD (${EthChange}%)
-    
-#Ripple $XRP
-$ ${XrpPrice} USD (${XrpChange}%)
-    
-#Dogecoin $DOGE
-$ ${DogePrice} USD (${DogeChange}%)
-    
-#Litecoin $LTC
-$ ${LtcPrice} USD (${LtcChange}%)
-
-#BasicAttentionToken $BAT
-$ ${BatPrice} USD (${BatChange}%)
-
-#Decentraland $MANA
-$ ${ManaPrice} USD (${ManaChange}%)
+$BTC ${BtcPrice} (${BtcChange}%)
+$ETH ${EthPrice} (${EthChange}%)
+$XRP ${XrpPrice} (${XrpChange}%)
+$DOGE ${DogePrice} (${DogeChange}%)
+$LTC ${LtcPrice} (${LtcChange}%)
+$BAT ${BatPrice} (${BatChange}%)
+$MANA ${ManaPrice} (${ManaChange}%)
 `;
     
             let Tweet = { status : Body };
