@@ -346,12 +346,12 @@ exports.handler = function(event, context, callback) {
                 else {
                     BatPrice = json.data[mana_id].quote['USD'].price;
                     BatPrice = Math.round(BatPrice * 100) / 100;
-                    callback(null, BtcPrice, BtcChange, EthPrice, EthChange, XrpPrice, XrpChange, DogePrice, DogeChange, LtcPrice, LtcChange, BatPrice, BatChange, ManaChange);
+                    callback(null, BtcPrice, BtcChange, EthPrice, EthChange, XrpPrice, XrpChange, DogePrice, DogeChange, LtcPrice, LtcChange, BatPrice, BatChange, ManaPrice);
                 }
             });ManaChange
         };
     
-        var CheckManaChange = (BtcPrice, BtcChange, EthPrice, EthChange, XrpPrice, XrpChange, DogePrice, DogeChange, LtcPrice, LtcChange, BatPrice, BatChange, ManaChange, callback) => {
+        var CheckManaChange = (BtcPrice, BtcChange, EthPrice, EthChange, XrpPrice, XrpChange, DogePrice, DogeChange, LtcPrice, LtcChange, BatPrice, BatChange, ManaPrice, callback) => {
             request({
                 url: cmc_url + mana_id,
                 headers: cmc_api_key,
@@ -364,12 +364,12 @@ exports.handler = function(event, context, callback) {
                 else {
                     BatChange = json.data[mana_id].quote['USD'].percent_change_24h;
                     BatChange = Math.round(BatChange * 100) / 100;
-                    callback(null, BtcPrice, BtcChange, EthPrice, EthChange, XrpPrice, XrpChange, DogePrice, DogeChange, LtcPrice, LtcChange, BatPrice, BatChange, ManaChange, ManaPrice);
+                    callback(null, BtcPrice, BtcChange, EthPrice, EthChange, XrpPrice, XrpChange, DogePrice, DogeChange, LtcPrice, LtcChange, BatPrice, BatChange, ManaPrice, ManaChange);
                 }
             });
         };
     
-        var CheckRate = (BtcPrice, BtcChange, EthPrice, EthChange, XrpPrice, XrpChange, DogePrice, DogeChange, LtcPrice, LtcChange, BatPrice, BatChange, ManaChange, ManaPrice, callback) => {
+        var CheckRate = (BtcPrice, BtcChange, EthPrice, EthChange, XrpPrice, XrpChange, DogePrice, DogeChange, LtcPrice, LtcChange, BatPrice, BatChange, ManaPrice, ManaChange, callback) => {
      
             let Body = `
 $BTC ${BtcPrice} (${BtcChange}%)
