@@ -559,7 +559,8 @@ $${BatPrice} (${BatChange}%)
                 throw err;
             }
             else {
-                twt.post('statuses/update', result, function(err, data, response) {
+                var tweet = result[result.length - 1]
+                twt.post('statuses/update', tweet, function(err, data, response) {
                     if (err) {
                         throw err;
                     }
