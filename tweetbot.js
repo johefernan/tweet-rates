@@ -62,7 +62,7 @@ exports.handler = function(event, context, callback) {
     
         var twit = require('twit');
         var request = require('request');
-        var waterfall = require('async-waterfall');
+        var async = require('async');
     
         // Getting Secrets Values 
         var secrets = JSON.parse(secret);
@@ -87,26 +87,17 @@ exports.handler = function(event, context, callback) {
         // CoinMarketCap IDs:
         const btc_id = 1;
         const eth_id = 1027;
+        const usdt_id = 825;
+        const bnb_id = 1839;
+        const ada_id = 2010;
         const xrp_id = 52;
         const doge_id = 74;
+        const usdc_id = 3408;
         const ltc_id = 2;
+        const xlm_id = 512;
         const bat_id = 1697;
-        const mana_id = 1966;
         
-        var BtcPrice, 
-            BtcChange, 
-            EthPrice, 
-            EthChange, 
-            XrpPrice, 
-            XrpChange, 
-            DogePrice, 
-            DogeChange, 
-            LtcPrice, 
-            LtcChange, 
-            BatPrice, 
-            BatChange, 
-            ManaPrice, 
-            ManaChange; 
+        var BtcPrice, BtcChange, EthPrice, EthChange, UsdtPrice, UsdtChange, BnbPrice, BnbChange, AdaPrice, AdaChange, XrpPrice, XrpChange, DogePrice, DogeChange, UsdcPrice, UsdcChange, LtcPrice, LtcChange, XlmPrice, XlmChange, BatPrice, BatChange;
     
         // Here we start to handling request to API
     
@@ -130,7 +121,7 @@ exports.handler = function(event, context, callback) {
             });
         };
     
-        var CheckBtcChange = (BtcPrice, callback) => {
+        var CheckBtcChange = (callback) => {
             request({
                 url: cmc_url + btc_id,
                 headers: cmc_api_key,
@@ -143,13 +134,13 @@ exports.handler = function(event, context, callback) {
                 else {
                     BtcChange = json.data[btc_id].quote['USD'].percent_change_24h;
                     BtcChange = Math.round(BtcChange * 100) / 100;
-                    callback(null, BtcPrice, BtcChange);
+                    callback(null,BtcChange);
                 }
             });
         };
     
         // Ethereum
-        var CheckEthPrice = (BtcPrice, BtcChange, callback) => {
+        var CheckEthPrice = (callback) => {
             request({
                 url: cmc_url + eth_id,
                 headers: cmc_api_key,
@@ -162,12 +153,12 @@ exports.handler = function(event, context, callback) {
                 else {
                     EthPrice = json.data[eth_id].quote['USD'].price;
                     EthPrice = Math.round(EthPrice * 100) / 100;
-                    callback(null, BtcPrice, BtcChange, EthPrice); 
+                    callback(null, EthPrice); 
                 }
             });
         };
     
-        var CheckEthChange = (BtcPrice, BtcChange, EthPrice, callback) => {
+        var CheckEthChange = (callback) => {
             request({
                 url: cmc_url + eth_id,
                 headers: cmc_api_key,
@@ -180,13 +171,124 @@ exports.handler = function(event, context, callback) {
                 else {
                     EthChange = json.data[eth_id].quote['USD'].percent_change_24h;
                     EthChange = Math.round(EthChange * 100) / 100;
-                    callback(null, BtcPrice, BtcChange, EthPrice, EthChange);
+                    callback(null, EthChange);
+                }
+            });
+        };
+
+        // Tether
+        var CheckUsdtPrice = (callback) => {
+            request({
+                url: cmc_url + usdt_id,
+                headers: cmc_api_key,
+                json: true,
+            },
+            (err, res, json) => {
+                if (err) {
+                    throw err;
+                }
+                else {
+                    UsdtPrice = json.data[usdt_id].quote['USD'].price;
+                    UsdtPrice = Math.round(UsdtPrice * 100) / 100;
+                    callback(null, UsdtPrice); 
+                }
+            });
+        };
+    
+        var CheckUsdtChange = (callback) => {
+            request({
+                url: cmc_url + usdt_id,
+                headers: cmc_api_key,
+                json: true,
+            },
+            (err, res, json) => {
+                if (err) {
+                    throw err;
+                }
+                else {
+                    UsdtChange = json.data[usdt_id].quote['USD'].percent_change_24h;
+                    UsdtChange = Math.round(UsdtChange * 100) / 100;
+                    callback(null, UsdtChange);
+                }
+            });
+        };
+
+        // Binance Coin
+        var CheckBnbPrice = (callback) => {
+            request({
+                url: cmc_url + bnb_id,
+                headers: cmc_api_key,
+                json: true,
+            },
+            (err, res, json) => {
+                if (err) {
+                    throw err;
+                }
+                else {
+                    BnbPrice = json.data[bnb_id].quote['USD'].price;
+                    BnbPrice = Math.round(BnbPrice * 100) / 100;
+                    callback(null, BnbPrice); 
+                }
+            });
+        };
+    
+        var CheckBnbChange = (callback) => {
+            request({
+                url: cmc_url + bnb_id,
+                headers: cmc_api_key,
+                json: true,
+            },
+            (err, res, json) => {
+                if (err) {
+                    throw err;
+                }
+                else {
+                    BnbChange = json.data[bnb_id].quote['USD'].percent_change_24h;
+                    BnbChange = Math.round(BnbChange * 100) / 100;
+                    callback(null, BnbChange);
+                }
+            });
+        };
+
+        // Cardano
+        var CheckAdaPrice = (callback) => {
+            request({
+                url: cmc_url + ada_id,
+                headers: cmc_api_key,
+                json: true,
+            },
+            (err, res, json) => {
+                if (err) {
+                    throw err;
+                }
+                else {
+                    AdaPrice = json.data[ada_id].quote['USD'].price;
+                    AdaPrice = Math.round(AdaPrice * 100) / 100;
+                    callback(null, AdaPrice); 
+                }
+            });
+        };
+    
+        var CheckAdaChange = (callback) => {
+            request({
+                url: cmc_url + ada_id,
+                headers: cmc_api_key,
+                json: true,
+            },
+            (err, res, json) => {
+                if (err) {
+                    throw err;
+                }
+                else {
+                    AdaChange = json.data[ada_id].quote['USD'].percent_change_24h;
+                    AdaChange = Math.round(AdaChange * 100) / 100;
+                    callback(null, AdaChange);
                 }
             });
         };
     
         // Ripple
-        var CheckXrpPrice = (BtcPrice, BtcChange, EthPrice, EthChange, callback) => {
+        var CheckXrpPrice = (callback) => {
             request({
                 url: cmc_url + xrp_id,
                 headers: cmc_api_key,
@@ -199,13 +301,13 @@ exports.handler = function(event, context, callback) {
                 else {
                     XrpPrice = json.data[xrp_id].quote['USD'].price;
                     XrpPrice = Math.round(XrpPrice * 100) / 100;
-                    callback(null, BtcPrice, BtcChange, EthPrice, EthChange, XrpPrice);
+                    callback(null, XrpPrice);
                 }
                 
             });
         };
     
-        var CheckXrpChange = (BtcPrice, BtcChange, EthPrice, EthChange, XrpPrice, callback) => {
+        var CheckXrpChange = (callback) => {
             request({
                 url: cmc_url + xrp_id,
                 headers: cmc_api_key,
@@ -218,13 +320,13 @@ exports.handler = function(event, context, callback) {
                 else {
                     XrpChange = json.data[xrp_id].quote['USD'].percent_change_24h;
                     XrpChange = Math.round(XrpChange * 100) / 100;
-                    callback(null, BtcPrice, BtcChange, EthPrice, EthChange, XrpPrice, XrpChange);
+                    callback(null, XrpChange);
                 }
             });
         };
     
         // Dogecoin
-        var CheckDogePrice = (BtcPrice, BtcChange, EthPrice, EthChange, XrpPrice, XrpChange, callback) => {
+        var CheckDogePrice = (callback) => {
             request({
                 url: cmc_url + doge_id,
                 headers: cmc_api_key,
@@ -237,12 +339,12 @@ exports.handler = function(event, context, callback) {
                 else {
                     DogePrice = json.data[doge_id].quote['USD'].price;
                     DogePrice = Math.round(DogePrice * 100) / 100;
-                    callback(null, BtcPrice, BtcChange, EthPrice, EthChange, XrpPrice, XrpChange, DogePrice);
+                    callback(null, DogePrice);
                 }
             });
         };
     
-        var CheckDogeChange = (BtcPrice, BtcChange, EthPrice, EthChange, XrpPrice, XrpChange, DogePrice, callback) => {
+        var CheckDogeChange = (callback) => {
             request({
                 url: cmc_url + doge_id,
                 headers: cmc_api_key,
@@ -255,13 +357,50 @@ exports.handler = function(event, context, callback) {
                 else {
                     DogeChange = json.data[doge_id].quote['USD'].percent_change_24h;
                     DogeChange = Math.round(DogeChange * 100) / 100;
-                    callback(null, BtcPrice, BtcChange, EthPrice, EthChange, XrpPrice, XrpChange, DogePrice, DogeChange);
+                    callback(null, DogeChange);
+                }
+            });
+        };
+
+        // USD Coin
+        var CheckUsdcPrice = (callback) => {
+            request({
+                url: cmc_url + usdc_id,
+                headers: cmc_api_key,
+                json: true,
+            },
+            (err, res, json) => {
+                if (err) {
+                    throw err;
+                }
+                else {
+                    UsdcPrice = json.data[usdc_id].quote['USD'].price;
+                    UsdcPrice = Math.round(UsdcPrice * 100) / 100;
+                    callback(null, UsdcPrice);
+                }
+            });
+        };
+    
+        var CheckUsdcChange = (callback) => {
+            request({
+                url: cmc_url + usdc_id,
+                headers: cmc_api_key,
+                json: true,
+            },
+            (err, res, json) => {
+                if (err) {
+                    throw err;
+                }
+                else {
+                    UsdcChange = json.data[usdc_id].quote['USD'].percent_change_24h;
+                    UsdcChange = Math.round(UsdcChange * 100) / 100;
+                    callback(null, UsdcChange);
                 }
             });
         };
     
         // Litecoin
-        var CheckLtcPrice = (BtcPrice, BtcChange, EthPrice, EthChange, XrpPrice, XrpChange, DogePrice, DogeChange, callback) => {
+        var CheckLtcPrice = (callback) => {
             request({
                 url: cmc_url + ltc_id,
                 headers: cmc_api_key,
@@ -274,12 +413,12 @@ exports.handler = function(event, context, callback) {
                 else {
                     LtcPrice = json.data[ltc_id].quote['USD'].price;
                     LtcPrice = Math.round(LtcPrice * 100) / 100;
-                    callback(null, BtcPrice, BtcChange, EthPrice, EthChange, XrpPrice, XrpChange, DogePrice, DogeChange, LtcPrice);
+                    callback(null, LtcPrice);
                 }
             });
         };
     
-        var CheckLtcChange = (BtcPrice, BtcChange, EthPrice, EthChange, XrpPrice, XrpChange, DogePrice, DogeChange, LtcPrice, callback) => {
+        var CheckLtcChange = (callback) => {
             request({
                 url: cmc_url + ltc_id,
                 headers: cmc_api_key,
@@ -292,12 +431,50 @@ exports.handler = function(event, context, callback) {
                 else {
                     LtcChange = json.data[ltc_id].quote['USD'].percent_change_24h;
                     LtcChange = Math.round(LtcChange * 100) / 100;
-                    callback(null, BtcPrice, BtcChange, EthPrice, EthChange, XrpPrice, XrpChange, DogePrice, DogeChange, LtcPrice, LtcChange);
+                    callback(null, LtcChange);
                 }
             });
         };
 
-        var CheckBatPrice = (BtcPrice, BtcChange, EthPrice, EthChange, XrpPrice, XrpChange, DogePrice, DogeChange, LtcPrice, LtcChange, callback) => {
+        // Stellar
+        var CheckXlmPrice = (callback) => {
+            request({
+                url: cmc_url + xlm_id,
+                headers: cmc_api_key,
+                json: true,
+            },
+            (err, res, json) => {
+                if (err) {
+                    throw err;
+                }
+                else {
+                    XlmPrice = json.data[xlm_id].quote['USD'].price;
+                    XlmPrice = Math.round(XlmPrice * 100) / 100;
+                    callback(null, XlmPrice);
+                }
+            });
+        };
+    
+        var CheckXlmChange = (callback) => {
+            request({
+                url: cmc_url + xlm_id,
+                headers: cmc_api_key,
+                json: true,
+            },
+            (err, res, json) => {
+                if (err) {
+                    throw err;
+                }
+                else {
+                    XlmChange = json.data[xlm_id].quote['USD'].percent_change_24h;
+                    XlmChange = Math.round(XlmChange * 100) / 100;
+                    callback(null, XlmChange);
+                }
+            });
+        };
+    
+        // Basic Attention Token
+        var CheckBatPrice = (callback) => {
             request({
                 url: cmc_url + bat_id,
                 headers: cmc_api_key,
@@ -310,12 +487,12 @@ exports.handler = function(event, context, callback) {
                 else {
                     BatPrice = json.data[bat_id].quote['USD'].price;
                     BatPrice = Math.round(BatPrice * 100) / 100;
-                    callback(null, BtcPrice, BtcChange, EthPrice, EthChange, XrpPrice, XrpChange, DogePrice, DogeChange, LtcPrice, LtcChange, BatPrice);
+                    callback(null, BatPrice);
                 }
             });
         };
     
-        var CheckBatChange = (BtcPrice, BtcChange, EthPrice, EthChange, XrpPrice, XrpChange, DogePrice, DogeChange, LtcPrice, LtcChange, BatPrice, callback) => {
+        var CheckBatChange = (callback) => {
             request({
                 url: cmc_url + bat_id,
                 headers: cmc_api_key,
@@ -328,72 +505,62 @@ exports.handler = function(event, context, callback) {
                 else {
                     BatChange = json.data[bat_id].quote['USD'].percent_change_24h;
                     BatChange = Math.round(BatChange * 100) / 100;
-                    callback(null, BtcPrice, BtcChange, EthPrice, EthChange, XrpPrice, XrpChange, DogePrice, DogeChange, LtcPrice, LtcChange, BatPrice, BatChange);
+                    callback(null, BatChange);
                 }
             });
         };
+    
+        var CheckRate = (BtcPrice, BtcChange, EthPrice, EthChange, UsdtPrice, UsdtChange, BnbPrice, BnbChange, AdaPrice, AdaChange, XrpPrice, XrpChange, DogePrice, DogeChange, UsdcPrice, UsdcChange, LtcPrice, LtcChange, XlmPrice, XlmChange, BatPrice, BatChange, callback) => {
 
-        var CheckManaPrice = (BtcPrice, BtcChange, EthPrice, EthChange, XrpPrice, XrpChange, DogePrice, DogeChange, LtcPrice, LtcChange, BatPrice, BatChange, callback) => {
-            request({
-                url: cmc_url + mana_id,
-                headers: cmc_api_key,
-                json: true,
-            },
-            (err, res, json) => {
-                if (err) {
-                    throw err;
-                }
-                else {
-                    ManaPrice = json.data[mana_id].quote['USD'].price;
-                    ManaPrice = Math.round(ManaPrice * 100) / 100;
-                    callback(null, BtcPrice, BtcChange, EthPrice, EthChange, XrpPrice, XrpChange, DogePrice, DogeChange, LtcPrice, LtcChange, BatPrice, BatChange, ManaPrice);
-                }
-            });ManaChange
-        };
-    
-        var CheckManaChange = (BtcPrice, BtcChange, EthPrice, EthChange, XrpPrice, XrpChange, DogePrice, DogeChange, LtcPrice, LtcChange, BatPrice, BatChange, ManaPrice, callback) => {
-            request({
-                url: cmc_url + mana_id,
-                headers: cmc_api_key,
-                json: true,
-            },
-            (err, res, json) => {
-                if (err) {
-                    throw err;
-                }
-                else {
-                    ManaChange = json.data[mana_id].quote['USD'].percent_change_24h;
-                    ManaChange = Math.round(ManaChange * 100) / 100;
-                    callback(null, BtcPrice, BtcChange, EthPrice, EthChange, XrpPrice, XrpChange, DogePrice, DogeChange, LtcPrice, LtcChange, BatPrice, BatChange, ManaPrice, ManaChange);
-                }
-            });
-        };
-    
-        var CheckRate = (BtcPrice, BtcChange, EthPrice, EthChange, XrpPrice, XrpChange, DogePrice, DogeChange, LtcPrice, LtcChange, BatPrice, BatChange, ManaPrice, ManaChange, callback) => {
-     
             let Body = `
-$BTC ${BtcPrice} (${BtcChange}%)
-$ETH ${EthPrice} (${EthChange}%)
-$XRP ${XrpPrice} (${XrpChange}%)
-$DOGE ${DogePrice} (${DogeChange}%)
-$LTC ${LtcPrice} (${LtcChange}%)
-$BAT ${BatPrice} (${BatChange}%)
-$MANA ${ManaPrice} (${ManaChange}%)
+$BTC
+$${BtcPrice} (${BatChange}%)
+
+$ETH
+$${EthPrice} (${EthChange}%)
+            
+$USDT
+$${UsdtPrice} (${UsdtChange}%)
+
+$BNB
+$${BnbPrice} (${BnbChange}%)
+
+$ADA
+$${AdaPrice} (${AdaChange}%)
+
+$XRP
+$${XrpPrice} (${XrpChange}%)
+
+$DOGE
+$${DogePrice} (${DogeChange}%)
+
+$USDC
+$${UsdcPrice} (${UsdcChange}%)
+
+$LTC
+$${LtcPrice} (${LtcChange}%)
+
+$XLM
+$${XlmPrice} (${XlmChange}%)
+
+$BAT
+$${BatPrice} (${BatChange}%)
 `;
-    
+
             let Tweet = { status : Body };
     
             callback(null, Tweet);
      
         };
     
-        // Running asynchronous functions in sequence with Async Waterfall.
-        waterfall([CheckBtcPrice, CheckBtcChange, CheckEthPrice, CheckEthChange, CheckXrpPrice, CheckXrpChange, CheckDogePrice, CheckDogeChange, CheckLtcPrice, CheckLtcChange, CheckBatPrice, CheckBatChange, CheckManaPrice, CheckManaChange, CheckRate], (err, result) => {
+        // Running asynchronous functions in sequence with Async Series.
+        async.series([CheckBtcPrice, CheckBtcChange, CheckEthPrice, CheckEthChange, CheckUsdtPrice, CheckUsdtChange, CheckBnbPrice, CheckBnbChange, CheckAdaPrice, CheckAdaChange, CheckXrpPrice, CheckXrpChange, CheckDogePrice, CheckDogeChange, CheckUsdcPrice, CheckUsdcChange, CheckLtcPrice, CheckLtcChange, CheckXlmPrice, CheckXlmChange, CheckBatPrice, CheckBatChange, CheckRate], (err, result) => {
             if (err) {
                 throw err;
             }
             else {
-                twt.post('statuses/update', result, function(err, data, response) {
+                var tweet = result[result.length - 1]
+                twt.post('statuses/update', tweet, function(err, data, response) {
                     if (err) {
                         throw err;
                     }
