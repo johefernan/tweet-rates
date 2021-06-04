@@ -510,11 +510,11 @@ exports.handler = function(event, context, callback) {
             });
         };
     
-        var CheckRate = (BtcPrice, BtcChange, EthPrice, EthChange, UsdtPrice, UsdtChange, BnbPrice, BnbChange, AdaPrice, AdaChange, XrpPrice, XrpChange, DogePrice, DogeChange, UsdcPrice, UsdcChange, LtcPrice, LtcChange, XlmPrice, XlmChange, BatPrice, BatChange, callback) => {
+        var CheckRate = (callback) => {
 
             let Body = `
 $BTC
-$${BtcPrice} (${BatChange}%)
+$${BtcPrice} (${BtcChange}%)
 
 $ETH
 $${EthPrice} (${EthChange}%)
