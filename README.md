@@ -32,14 +32,15 @@ SECRET_NAME: "MyNewSecret/TweetRatesKeys"
 
 - Bitcoin
 - Ethereum
+- Tether
+- Binance Coin
+- Cardano
 - Ripple
 - Dogecoin
+- USD Coin
 - Litecoin
-- Basic Attention Token (Floating Rate)
-
-##### Floating Rate
-
-The Floating Rate is based on cryptocurrency top percent changes. This floating rate will change over the time and any special request, for instance, a new rate, will be considered as a Floating Rate.
+- Stellar
+- Basic Attention Token
 
 These rates are provided by [CoinMarketCap](https://coinmarketcap.com/). For a higher amount of rates, please refer to https://coinmarketcap.com/api/documentation/v1/#operation/getV1CryptocurrencyQuotesLatest
 

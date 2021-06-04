@@ -1,6 +1,6 @@
 {
   "name": "tweet-rates",
-  "version": "1.1.3",
+  "version": "1.2.0",
   "description": "Tweet Cryptocurrency Rates",
   "main": "tweetbot.js",
   "scripts": {
@@ -17,7 +17,7 @@
   },
   "homepage": "https://github.com/johefernan/tweet-rates#readme",
   "dependencies": {
-    "async-waterfall": "^0.1.5",
+    "async": "^3.2.0",
     "aws-sdk": "^2.865.0",
     "request": "^2.88.2",
     "twit": "^2.2.11"
