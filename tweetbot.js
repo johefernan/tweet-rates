@@ -114,7 +114,7 @@ exports.handler = function(event, context, callback) {
                 }
                 else {
                     BtcPrice = json.data[btc_id].quote['USD'].price;
-                    BtcPrice = Math.round(BtcPrice * 100) / 100;
+                    BtcPrice = BtcPrice.toFixed(2);
                     callback(null, BtcPrice);
                 }
                 
@@ -133,7 +133,7 @@ exports.handler = function(event, context, callback) {
                 }
                 else {
                     BtcChange = json.data[btc_id].quote['USD'].percent_change_24h;
-                    BtcChange = Math.round(BtcChange * 100) / 100;
+                    BtcChange = BtcChange.toFixed(2);
                     callback(null,BtcChange);
                 }
             });
@@ -152,7 +152,7 @@ exports.handler = function(event, context, callback) {
                 }
                 else {
                     EthPrice = json.data[eth_id].quote['USD'].price;
-                    EthPrice = Math.round(EthPrice * 100) / 100;
+                    EthPrice = EthPrice.toFixed(2);
                     callback(null, EthPrice); 
                 }
             });
@@ -170,7 +170,7 @@ exports.handler = function(event, context, callback) {
                 }
                 else {
                     EthChange = json.data[eth_id].quote['USD'].percent_change_24h;
-                    EthChange = Math.round(EthChange * 100) / 100;
+                    EthChange = EthChange.toFixed(2);
                     callback(null, EthChange);
                 }
             });
@@ -189,7 +189,7 @@ exports.handler = function(event, context, callback) {
                 }
                 else {
                     UsdtPrice = json.data[usdt_id].quote['USD'].price;
-                    UsdtPrice = Math.round(UsdtPrice * 100) / 100;
+                    UsdtPrice = UsdtPrice.toFixed(2);
                     callback(null, UsdtPrice); 
                 }
             });
@@ -207,7 +207,7 @@ exports.handler = function(event, context, callback) {
                 }
                 else {
                     UsdtChange = json.data[usdt_id].quote['USD'].percent_change_24h;
-                    UsdtChange = Math.round(UsdtChange * 100) / 100;
+                    UsdtChange = UsdtChange.toFixed(2);
                     callback(null, UsdtChange);
                 }
             });
@@ -226,7 +226,7 @@ exports.handler = function(event, context, callback) {
                 }
                 else {
                     BnbPrice = json.data[bnb_id].quote['USD'].price;
-                    BnbPrice = Math.round(BnbPrice * 100) / 100;
+                    BnbPrice = BnbPrice.toFixed(2);
                     callback(null, BnbPrice); 
                 }
             });
@@ -244,7 +244,7 @@ exports.handler = function(event, context, callback) {
                 }
                 else {
                     BnbChange = json.data[bnb_id].quote['USD'].percent_change_24h;
-                    BnbChange = Math.round(BnbChange * 100) / 100;
+                    BnbChange = BnbChange.toFixed(2);
                     callback(null, BnbChange);
                 }
             });
@@ -263,7 +263,7 @@ exports.handler = function(event, context, callback) {
                 }
                 else {
                     AdaPrice = json.data[ada_id].quote['USD'].price;
-                    AdaPrice = Math.round(AdaPrice * 100) / 100;
+                    AdaPrice = AdaPrice.toFixed(2);
                     callback(null, AdaPrice); 
                 }
             });
@@ -281,7 +281,7 @@ exports.handler = function(event, context, callback) {
                 }
                 else {
                     AdaChange = json.data[ada_id].quote['USD'].percent_change_24h;
-                    AdaChange = Math.round(AdaChange * 100) / 100;
+                    AdaChange = AdaChange.toFixed(2);
                     callback(null, AdaChange);
                 }
             });
@@ -300,7 +300,7 @@ exports.handler = function(event, context, callback) {
                 }
                 else {
                     XrpPrice = json.data[xrp_id].quote['USD'].price;
-                    XrpPrice = Math.round(XrpPrice * 100) / 100;
+                    XrpPrice = XrpPrice.toFixed(2);
                     callback(null, XrpPrice);
                 }
                 
@@ -319,7 +319,7 @@ exports.handler = function(event, context, callback) {
                 }
                 else {
                     XrpChange = json.data[xrp_id].quote['USD'].percent_change_24h;
-                    XrpChange = Math.round(XrpChange * 100) / 100;
+                    XrpChange = XrpChange.toFixed(2);
                     callback(null, XrpChange);
                 }
             });
@@ -338,7 +338,7 @@ exports.handler = function(event, context, callback) {
                 }
                 else {
                     DogePrice = json.data[doge_id].quote['USD'].price;
-                    DogePrice = Math.round(DogePrice * 100) / 100;
+                    DogePrice = DogePrice.toFixed(2);
                     callback(null, DogePrice);
                 }
             });
@@ -356,7 +356,7 @@ exports.handler = function(event, context, callback) {
                 }
                 else {
                     DogeChange = json.data[doge_id].quote['USD'].percent_change_24h;
-                    DogeChange = Math.round(DogeChange * 100) / 100;
+                    DogeChange = DogeChange.toFixed(2);
                     callback(null, DogeChange);
                 }
             });
@@ -375,7 +375,7 @@ exports.handler = function(event, context, callback) {
                 }
                 else {
                     UsdcPrice = json.data[usdc_id].quote['USD'].price;
-                    UsdcPrice = Math.round(UsdcPrice * 100) / 100;
+                    UsdcPrice = UsdcPrice.toFixed(2);
                     callback(null, UsdcPrice);
                 }
             });
@@ -393,7 +393,7 @@ exports.handler = function(event, context, callback) {
                 }
                 else {
                     UsdcChange = json.data[usdc_id].quote['USD'].percent_change_24h;
-                    UsdcChange = Math.round(UsdcChange * 100) / 100;
+                    UsdcChange = UsdcChange.toFixed(2);
                     callback(null, UsdcChange);
                 }
             });
@@ -412,7 +412,7 @@ exports.handler = function(event, context, callback) {
                 }
                 else {
                     LtcPrice = json.data[ltc_id].quote['USD'].price;
-                    LtcPrice = Math.round(LtcPrice * 100) / 100;
+                    LtcPrice = LtcPrice.toFixed(2);
                     callback(null, LtcPrice);
                 }
             });
@@ -430,7 +430,7 @@ exports.handler = function(event, context, callback) {
                 }
                 else {
                     LtcChange = json.data[ltc_id].quote['USD'].percent_change_24h;
-                    LtcChange = Math.round(LtcChange * 100) / 100;
+                    LtcChange = LtcChange.toFixed(2);
                     callback(null, LtcChange);
                 }
             });
@@ -449,7 +449,7 @@ exports.handler = function(event, context, callback) {
                 }
                 else {
                     XlmPrice = json.data[xlm_id].quote['USD'].price;
-                    XlmPrice = Math.round(XlmPrice * 100) / 100;
+                    XlmPrice = XlmPrice.toFixed(2);
                     callback(null, XlmPrice);
                 }
             });
@@ -467,7 +467,7 @@ exports.handler = function(event, context, callback) {
                 }
                 else {
                     XlmChange = json.data[xlm_id].quote['USD'].percent_change_24h;
-                    XlmChange = Math.round(XlmChange * 100) / 100;
+                    XlmChange = XlmChange.toFixed(2);
                     callback(null, XlmChange);
                 }
             });
@@ -486,7 +486,7 @@ exports.handler = function(event, context, callback) {
                 }
                 else {
                     BatPrice = json.data[bat_id].quote['USD'].price;
-                    BatPrice = Math.round(BatPrice * 100) / 100;
+                    BatPrice = BatPrice.toFixed(2);
                     callback(null, BatPrice);
                 }
             });
@@ -504,7 +504,7 @@ exports.handler = function(event, context, callback) {
                 }
                 else {
                     BatChange = json.data[bat_id].quote['USD'].percent_change_24h;
-                    BatChange = Math.round(BatChange * 100) / 100;
+                    BatChange = BatChange.toFixed(2);
                     callback(null, BatChange);
                 }
             });
