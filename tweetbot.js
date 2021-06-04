@@ -513,28 +513,28 @@ exports.handler = function(event, context, callback) {
         var CheckRate = (callback) => {
 
             let Body = `
-$BTC (${BtcChange}%)
-$${BtcPrice}
-$ETH (${EthChange}%)
-$${EthPrice}
-$USDT (${UsdtChange}%)
-$${UsdtPrice} 
-$BNB (${BnbChange}%)
-$${BnbPrice}
-$ADA (${AdaChange}%)
-$${AdaPrice}
-$XRP (${XrpChange}%)
-$${XrpPrice}
-$DOGE (${DogeChange}%)
-$${DogePrice}
-$USDC (${UsdcChange}%)
-$${UsdcPrice}
-$LTC (${LtcChange}%)
-$${LtcPrice}
-$XLM (${XlmChange}%)
-$${XlmPrice}
-$BAT (${BatChange}%)
-$${BatPrice}
+$BTC
+$${BtcPrice} (${BtcChange}%)
+$ETH
+$${EthPrice} (${EthChange}%)
+$USDT
+$${UsdtPrice} (${UsdtChange}%)
+$BNB
+$${BnbPrice} (${BnbChange}%)
+$ADA
+$${AdaPrice} (${AdaChange}%)
+$XRP
+$${XrpPrice} (${XrpChange}%)
+$DOGE
+$${DogePrice} (${DogeChange}%)
+$USDC
+$${UsdcPrice} (${UsdcChange}%)
+$LTC
+$${LtcPrice} (${LtcChange}%)
+$XLM
+$${XlmPrice} (${XlmChange}%)
+$BAT
+$${BatPrice} (${BatChange}%)
 `;
 
             let Tweet = { status : Body };
