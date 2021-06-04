@@ -1,3 +1,5 @@
+[![Deployment](https://github.com/johefernan/tweet-rates/actions/workflows/main.yml/badge.svg?branch=master&event=status)](https://github.com/johefernan/tweet-rates/actions/workflows/main.yml)
+
 # TweetRates
 
 ### Twitter Bot for Cryptocurrency Rates.
