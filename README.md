@@ -1,4 +1,4 @@
-[![Deployment](https://github.com/johefernan/tweet-rates/actions/workflows/main.yml/badge.svg?branch=master&event=status)](https://github.com/johefernan/tweet-rates/actions/workflows/main.yml)
+[![build and deploy](https://github.com/johefernan/tweet-rates/actions/workflows/main.yml/badge.svg?branch=master)](https://github.com/johefernan/tweet-rates/actions/workflows/main.yml)
 
 # TweetRates
 
