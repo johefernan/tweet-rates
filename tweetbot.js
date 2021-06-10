@@ -87,17 +87,14 @@ exports.handler = function(event, context, callback) {
         // CoinMarketCap IDs:
         const btc_id = 1;
         const eth_id = 1027;
-        const usdt_id = 825;
         const bnb_id = 1839;
         const ada_id = 2010;
         const xrp_id = 52;
         const doge_id = 74;
-        const usdc_id = 3408;
         const ltc_id = 2;
         const xlm_id = 512;
-        const bat_id = 1697;
         
-        var BtcPrice, BtcChange, EthPrice, EthChange, UsdtPrice, UsdtChange, BnbPrice, BnbChange, AdaPrice, AdaChange, XrpPrice, XrpChange, DogePrice, DogeChange, UsdcPrice, UsdcChange, LtcPrice, LtcChange, XlmPrice, XlmChange, BatPrice, BatChange;
+        var BtcPrice, BtcChange, EthPrice, EthChange, BnbPrice, BnbChange, AdaPrice, AdaChange, XrpPrice, XrpChange, DogePrice, DogeChange, LtcPrice, LtcChange, XlmPrice, XlmChange;
     
         // Here we start to handling request to API
     
@@ -172,43 +169,6 @@ exports.handler = function(event, context, callback) {
                     EthChange = json.data[eth_id].quote['USD'].percent_change_24h;
                     EthChange = EthChange.toFixed(2);
                     callback(null, EthChange);
-                }
-            });
-        };
-
-        // Tether
-        var CheckUsdtPrice = (callback) => {
-            request({
-                url: cmc_url + usdt_id,
-                headers: cmc_api_key,
-                json: true,
-            },
-            (err, res, json) => {
-                if (err) {
-                    throw err;
-                }
-                else {
-                    UsdtPrice = json.data[usdt_id].quote['USD'].price;
-                    UsdtPrice = UsdtPrice.toFixed(2);
-                    callback(null, UsdtPrice); 
-                }
-            });
-        };
-    
-        var CheckUsdtChange = (callback) => {
-            request({
-                url: cmc_url + usdt_id,
-                headers: cmc_api_key,
-                json: true,
-            },
-            (err, res, json) => {
-                if (err) {
-                    throw err;
-                }
-                else {
-                    UsdtChange = json.data[usdt_id].quote['USD'].percent_change_24h;
-                    UsdtChange = UsdtChange.toFixed(2);
-                    callback(null, UsdtChange);
                 }
             });
         };
@@ -361,43 +321,6 @@ exports.handler = function(event, context, callback) {
                 }
             });
         };
-
-        // USD Coin
-        var CheckUsdcPrice = (callback) => {
-            request({
-                url: cmc_url + usdc_id,
-                headers: cmc_api_key,
-                json: true,
-            },
-            (err, res, json) => {
-                if (err) {
-                    throw err;
-                }
-                else {
-                    UsdcPrice = json.data[usdc_id].quote['USD'].price;
-                    UsdcPrice = UsdcPrice.toFixed(2);
-                    callback(null, UsdcPrice);
-                }
-            });
-        };
-    
-        var CheckUsdcChange = (callback) => {
-            request({
-                url: cmc_url + usdc_id,
-                headers: cmc_api_key,
-                json: true,
-            },
-            (err, res, json) => {
-                if (err) {
-                    throw err;
-                }
-                else {
-                    UsdcChange = json.data[usdc_id].quote['USD'].percent_change_24h;
-                    UsdcChange = UsdcChange.toFixed(2);
-                    callback(null, UsdcChange);
-                }
-            });
-        };
     
         // Litecoin
         var CheckLtcPrice = (callback) => {
@@ -473,68 +396,25 @@ exports.handler = function(event, context, callback) {
             });
         };
     
-        // Basic Attention Token
-        var CheckBatPrice = (callback) => {
-            request({
-                url: cmc_url + bat_id,
-                headers: cmc_api_key,
-                json: true,
-            },
-            (err, res, json) => {
-                if (err) {
-                    throw err;
-                }
-                else {
-                    BatPrice = json.data[bat_id].quote['USD'].price;
-                    BatPrice = BatPrice.toFixed(2);
-                    callback(null, BatPrice);
-                }
-            });
-        };
-    
-        var CheckBatChange = (callback) => {
-            request({
-                url: cmc_url + bat_id,
-                headers: cmc_api_key,
-                json: true,
-            },
-            (err, res, json) => {
-                if (err) {
-                    throw err;
-                }
-                else {
-                    BatChange = json.data[bat_id].quote['USD'].percent_change_24h;
-                    BatChange = BatChange.toFixed(2);
-                    callback(null, BatChange);
-                }
-            });
-        };
-    
         var CheckRate = (callback) => {
 
             let Body = `
-$BTC
+#Bitcoin $BTC
 $${BtcPrice} (${BtcChange}%)
-$ETH
+#Ether $ETH
 $${EthPrice} (${EthChange}%)
-$USDT
-$${UsdtPrice} (${UsdtChange}%)
-$BNB
+#Binance $BNB
 $${BnbPrice} (${BnbChange}%)
-$ADA
+#Cardano $ADA
 $${AdaPrice} (${AdaChange}%)
-$XRP
+#Ripple $XRP
 $${XrpPrice} (${XrpChange}%)
-$DOGE
+#Dogecoin $DOGE
 $${DogePrice} (${DogeChange}%)
-$USDC
-$${UsdcPrice} (${UsdcChange}%)
-$LTC
+#Litecoin $LTC
 $${LtcPrice} (${LtcChange}%)
-$XLM
+#Stellar $XLM
 $${XlmPrice} (${XlmChange}%)
-$BAT
-$${BatPrice} (${BatChange}%)
 `;
 
             let Tweet = { status : Body };
@@ -544,7 +424,7 @@ $${BatPrice} (${BatChange}%)
         };
     
         // Running asynchronous functions in sequence with Async Series.
-        async.series([CheckBtcPrice, CheckBtcChange, CheckEthPrice, CheckEthChange, CheckUsdtPrice, CheckUsdtChange, CheckBnbPrice, CheckBnbChange, CheckAdaPrice, CheckAdaChange, CheckXrpPrice, CheckXrpChange, CheckDogePrice, CheckDogeChange, CheckUsdcPrice, CheckUsdcChange, CheckLtcPrice, CheckLtcChange, CheckXlmPrice, CheckXlmChange, CheckBatPrice, CheckBatChange, CheckRate], (err, result) => {
+        async.series([CheckBtcPrice, CheckBtcChange, CheckEthPrice, CheckEthChange, CheckBnbPrice, CheckBnbChange, CheckAdaPrice, CheckAdaChange, CheckXrpPrice, CheckXrpChange, CheckDogePrice, CheckDogeChange, CheckLtcPrice, CheckLtcChange, CheckXlmPrice, CheckXlmChange, CheckRate], (err, result) => {
             if (err) {
                 throw err;
             }

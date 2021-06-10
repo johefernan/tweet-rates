@@ -34,15 +34,12 @@ SECRET_NAME: "MyNewSecret/TweetRatesKeys"
 
 - Bitcoin
 - Ethereum
-- Tether
 - Binance Coin
 - Cardano
 - Ripple
 - Dogecoin
-- USD Coin
 - Litecoin
 - Stellar
-- Basic Attention Token
 
 These rates are provided by [CoinMarketCap](https://coinmarketcap.com/). For a higher amount of rates, please refer to https://coinmarketcap.com/api/documentation/v1/#operation/getV1CryptocurrencyQuotesLatest
 
