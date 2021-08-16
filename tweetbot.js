@@ -401,7 +401,7 @@ exports.handler = function(event, context, callback) {
             let Body = `
 #Bitcoin $BTC
 $${BtcPrice} (${BtcChange}%)
-#Ether $ETH
+#Ethereum $ETH
 $${EthPrice} (${EthChange}%)
 #Binance $BNB
 $${BnbPrice} (${BnbChange}%)
