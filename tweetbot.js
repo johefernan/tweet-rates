@@ -92,9 +92,9 @@ exports.handler = function(event, context, callback) {
         const xrp_id = 52;
         const doge_id = 74;
         const ltc_id = 2;
-        const xlm_id = 512;
+        const sol_id = 5426;
         
-        var BtcPrice, BtcChange, EthPrice, EthChange, BnbPrice, BnbChange, AdaPrice, AdaChange, XrpPrice, XrpChange, DogePrice, DogeChange, LtcPrice, LtcChange, XlmPrice, XlmChange;
+        var BtcPrice, BtcChange, EthPrice, EthChange, BnbPrice, BnbChange, AdaPrice, AdaChange, XrpPrice, XrpChange, DogePrice, DogeChange, LtcPrice, LtcChange, SolPrice, SolChange;
     
         // Here we start to handling request to API
     
@@ -360,9 +360,9 @@ exports.handler = function(event, context, callback) {
         };
 
         // Stellar
-        var CheckXlmPrice = (callback) => {
+        var CheckSolPrice = (callback) => {
             request({
-                url: cmc_url + xlm_id,
+                url: cmc_url + sol_id,
                 headers: cmc_api_key,
                 json: true,
             },
@@ -371,16 +371,16 @@ exports.handler = function(event, context, callback) {
                     throw err;
                 }
                 else {
-                    XlmPrice = json.data[xlm_id].quote['USD'].price;
-                    XlmPrice = XlmPrice.toFixed(2);
-                    callback(null, XlmPrice);
+                    SolPrice = json.data[sol_id].quote['USD'].price;
+                    SolPrice = SolPrice.toFixed(2);
+                    callback(null, SolPrice);
                 }
             });
         };
     
-        var CheckXlmChange = (callback) => {
+        var CheckSolChange = (callback) => {
             request({
-                url: cmc_url + xlm_id,
+                url: cmc_url + sol_id,
                 headers: cmc_api_key,
                 json: true,
             },
@@ -389,9 +389,9 @@ exports.handler = function(event, context, callback) {
                     throw err;
                 }
                 else {
-                    XlmChange = json.data[xlm_id].quote['USD'].percent_change_24h;
-                    XlmChange = XlmChange.toFixed(2);
-                    callback(null, XlmChange);
+                    SolChange = json.data[sol_id].quote['USD'].percent_change_24h;
+                    SolChange = SolChange.toFixed(2);
+                    callback(null, SolChange);
                 }
             });
         };
@@ -413,8 +413,8 @@ $${XrpPrice} (${XrpChange}%)
 $${DogePrice} (${DogeChange}%)
 #Litecoin $LTC
 $${LtcPrice} (${LtcChange}%)
-#Stellar $XLM
-$${XlmPrice} (${XlmChange}%)
+#Solana $SOL
+$${SolPrice} (${SolChange}%)
 `;
 
             let Tweet = { status : Body };
@@ -424,7 +424,7 @@ $${XlmPrice} (${XlmChange}%)
         };
     
         // Running asynchronous functions in sequence with Async Series.
-        async.series([CheckBtcPrice, CheckBtcChange, CheckEthPrice, CheckEthChange, CheckBnbPrice, CheckBnbChange, CheckAdaPrice, CheckAdaChange, CheckXrpPrice, CheckXrpChange, CheckDogePrice, CheckDogeChange, CheckLtcPrice, CheckLtcChange, CheckXlmPrice, CheckXlmChange, CheckRate], (err, result) => {
+        async.series([CheckBtcPrice, CheckBtcChange, CheckEthPrice, CheckEthChange, CheckBnbPrice, CheckBnbChange, CheckAdaPrice, CheckAdaChange, CheckXrpPrice, CheckXrpChange, CheckDogePrice, CheckDogeChange, CheckLtcPrice, CheckLtcChange, CheckSolPrice, CheckSolChange, CheckRate], (err, result) => {
             if (err) {
                 throw err;
             }
