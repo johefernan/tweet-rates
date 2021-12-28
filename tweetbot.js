@@ -372,7 +372,6 @@ exports.handler = function(event, context, callback) {
                 }
                 else {
                     ShibPrice = json.data[shib_id].quote['USD'].price;
-                    ShibPrice = ShibPrice.toFixed(2);
                     callback(null, ShibPrice); 
                 }
             });
